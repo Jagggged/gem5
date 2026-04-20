@@ -138,7 +138,8 @@ static const OpClass CustomMatMuliVpushOp = enums::CustomMatMuliVpush;
 static const OpClass CustomMatMulwVpushOp = enums::CustomMatMulwVpush;
 static const OpClass CustomMatMulvpopOp = enums::CustomMatMulvpop;
 static const OpClass CustomVexpOp = enums::CustomVexp;
-static const OpClass CustomVexp2Op = enums::CustomVexp2;
+// Hands-on: Add below lines
+// static const OpClass CustomVexp2Op = enums::CustomVexp2;
 static const OpClass CustomVerfOp = enums::CustomVerf;
 static const OpClass CustomVtanhOp = enums::CustomVtanh;
 static const OpClass CustomVsinOp = enums::CustomVsin;

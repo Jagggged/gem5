@@ -4774,13 +4774,14 @@ decode QUADRANT default Unknown::unknown() {
         }
 
     0x16: decode FUNCT3 { // CUSTOMFORMAT
-        0x0: decode VFUNCT6 {
-            0x8: decode VM {
-                0x0: VectorNonSplitFormat::vexp2_v({{
-                    Vd_vu[0] = Vs2_vu[0];
-                }}, OPFVV, CustomVexp2Op);
-            }
-        }
+        // Hands-on: Add below lines
+        // 0x0: decode VFUNCT6 {
+        //     0x8: decode VM {
+        //         0x0: VectorNonSplitFormat::vexp2_v({{
+        //             Vd_vu[0] = Vs2_vu[0];
+        //         }}, OPFVV, CustomVexp2Op);
+        //     }
+        // }
         0x3: decode VFUNCT6 {
             0x1: decode VM {
                 0x1: decode SIMM5 {
