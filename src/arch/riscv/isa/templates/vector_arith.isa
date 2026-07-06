@@ -367,8 +367,21 @@ template<typename ElemType>
     %(set_reg_idx_arr)s;
     %(constructor)s;
     const int64_t vlmul = vtype_vlmul(_machInst.vtype8);
-    // Todo: move to Decode template
-    panic_if(vlmul == 3, "LMUL=8 is illegal for widening inst");
+    // LMUL=8 is illegal for widening/narrowing insts (the wide operand needs
+    // EMUL = 2*LMUL = 16 registers, which does not exist). But this constructor
+    // runs at *decode*, where the vtype can be stale: in a pipelined CPU (e.g.
+    // MinorCPU) the preceding vset has not executed yet (vtype is only committed
+    // at the vset's execute), so this macro-op may be a speculative decode that
+    // gets squashed once the vset resolves and redirects fetch. Panicking here
+    // would abort the whole simulation on an instruction that is never actually
+    // committed. Instead emit a single nop micro-op; the correct decode (with
+    // the resolved vtype) happens after the squash/redirect.
+    if (vlmul == 3) {
+        this->microops.push_back(new VectorNopMicroInst(_machInst));
+        this->microops.front()->setFirstMicroop();
+        this->microops.back()->setLastMicroop();
+        return;
+    }
     // when LMUL setted as m1, need to split to 2 micro insts
     const uint32_t num_microops = 1 << std::max<int64_t>(0, vlmul + 1);
 
