@@ -4887,6 +4887,9 @@ decode QUADRANT default Unknown::unknown() {
                     0x2: VectorNonSplitFormat::vlog_v({{
                         Vd_vu[0] = Vs2_vu[0];
                     }}, OPFVV, CustomVlogOp);
+                    0x3: VectorNonSplitFormat::vatan_v({{
+                        Vd_vu[0] = Vs2_vu[0];
+                    }}, OPFVV, CustomVatanOp);
                 }
             }
         }
