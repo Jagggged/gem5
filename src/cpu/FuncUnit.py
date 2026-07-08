@@ -125,6 +125,8 @@ class OpClass(Enum):
         "CustomVtanh",
         "CustomVsin",
         "CustomVcos",
+        "CustomVlog",
+        "CustomVatan",
         "CustomVlaneIdx",
     ]
 
